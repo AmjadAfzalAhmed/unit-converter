@@ -25,7 +25,16 @@ st.markdown("""
     -webkit-text-fill-color: transparent;
     margin-bottom: 20px;    
     }
-            
+.success {
+    background-color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    color: green !important;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -62,7 +71,8 @@ if st.sidebar.button("Convert"):
     try:
         quantity = ureg.Quantity(value, from_unit)
         converted = quantity.to(to_unit)
-                
+        st.sidebar.markdown("<h2 class='success'>Conversion successful</h2>",unsafe_allow_html=True)
+        st.sidebar.write(f"**<div style='text-align:center;color:white; font-size:16px;'>{value} {from_unit} equals {converted.magnitude:.4f} {to_unit}</div>**",unsafe_allow_html=True)        
         st.write("<h3 style='text-align: center; color: white;background: linear-gradient(45deg, #ff0066, #ffcc00, #33cc33,rgb(27, 14, 209), #9933ff); border-radius: 20px;'>Conversion Result</h3>", unsafe_allow_html=True)
         st.write(f"**<div style='text-align:center;color:green; font-size:20px; font-weight:bold;'>{value} {from_unit} equals {converted.magnitude:.4f} {to_unit}</div>**",unsafe_allow_html=True)
     except Exception as e:
